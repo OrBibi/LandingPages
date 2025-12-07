@@ -91,4 +91,123 @@
         }
       });
     </script>
+    
+    <!-- FIREBASE & ANALYTICS CONNECTION (INJECTED BY LANDINGGEN) -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getFirestore, collection, addDoc, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+      const firebaseConfig = {"apiKey":"AIzaSyBtY_IrbV0TZLNvJ9Nr1h9UQFXygbO0zBQ","authDomain":"landingpages-4d6a8.firebaseapp.com","projectId":"landingpages-4d6a8","storageBucket":"landingpages-4d6a8.firebasestorage.app","messagingSenderId":"745990656140","appId":"1:745990656140:web:367c261db9156b15f66ba9","measurementId":"G-VJGLT3ZYJ6"};
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const auth = getAuth(app);
+      const pageId = "8xdzn1gbua";
+      
+      // Google Form Config
+      const googleFormUrl = "";
+      const fieldMappings = {};
+      const redirectUrl = "";
+
+      // Authenticate to access Firestore
+      signInAnonymously(auth).then(() => {
+          console.log("Connected to backend.");
+      }).catch(err => console.error("Auth error", err));
+
+      document.addEventListener('DOMContentLoaded', async () => {
+        // 1. Track View (wait slightly for auth)
+        setTimeout(async () => {
+            try {
+                 const pageRef = doc(db, "pages", pageId);
+                 await updateDoc(pageRef, {
+                     "stats.views": increment(1)
+                 });
+            } catch(e) { console.error("Tracking error", e); }
+        }, 1000);
+
+        // 2. Handle Form
+        const form = document.getElementById('lead-form');
+        const thankYouDiv = document.getElementById('thank-you-msg');
+        
+        if (form) {
+          form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn ? submitBtn.innerText : 'Submit';
+            
+            if(submitBtn) {
+                submitBtn.innerText = 'Sending...';
+                submitBtn.disabled = true;
+            }
+
+            try {
+                // Ensure auth
+                if (!auth.currentUser) await signInAnonymously(auth);
+
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                
+                // A. Send to Firebase (Leads)
+                await addDoc(collection(db, "leads"), {
+                    pageId: pageId,
+                    email: data.email || "unknown",
+                    name: data.name || "",
+                    data: data,
+                    submittedAt: Date.now(),
+                    source: window.location.hostname
+                });
+
+                // B. Track Conversion
+                try {
+                     const pageRef = doc(db, "pages", pageId);
+                     await updateDoc(pageRef, {
+                         "stats.conversions": increment(1)
+                     });
+                } catch(e) {}
+
+                // C. Send to Google Forms (if configured)
+                if (googleFormUrl) {
+                    const googleFormData = new FormData();
+                    for (const [key, value] of Object.entries(data)) {
+                        if (fieldMappings[key]) {
+                            googleFormData.append(fieldMappings[key], value);
+                        }
+                    }
+                    // Send no-cors request
+                    fetch(googleFormUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: googleFormData
+                    }).catch(err => console.error("Google Form Error", err));
+                }
+
+                // D. Success UX
+                form.reset();
+                
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                } else if (thankYouDiv) {
+                    form.style.display = 'none';
+                    thankYouDiv.style.display = 'block';
+                    thankYouDiv.classList.remove('hidden');
+                } else {
+                    alert("Thank you! Your information has been received.");
+                }
+
+            } catch (error) {
+                console.error("Error submitting lead:", error);
+                alert("Something went wrong. Please try again.");
+            } finally {
+                 if(submitBtn) {
+                    submitBtn.innerText = "Sent!";
+                    setTimeout(() => {
+                        submitBtn.innerText = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                 }
+            }
+          });
+        }
+      });
+    </script>
     </body></html>
