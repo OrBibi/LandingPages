@@ -1,0 +1,1 @@
+console.log('Fitness Trainer Page Loaded');
