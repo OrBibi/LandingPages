@@ -1,4 +1,6 @@
-// 🛑 הוספת ההגדרות וקבועי ה-ID (הטמע ידנית!)
+// -----------------------------------------------------
+// ⚠️ CONFIGURATION (חובה להתאים ל-HTML)
+// -----------------------------------------------------
 const firebaseConfig = {
     apiKey: "AIzaSyBtY_IrbV0TZLNvJ9Nr1h9UQFXygbO0zBQ",
     authDomain: "landingpages-4d6a8.firebaseapp.com",
@@ -8,21 +10,21 @@ const firebaseConfig = {
     appId: "1:745990656140:web:367c261db9156b15f66ba9",
     measurementId: "G-VJGLT3ZYJ6"
 };
-// ⚠️ ודא שה-ID הזה הוא ה-ID האמיתי של מסמך הדף שלך ב-Firestore
+// ⚠️ ודא שה-ID הזה הוא ה-ID האמיתי שלך ב-Firestore
 const PAGE_DOC_ID = 'mr3jz9athyw12k7k0esb'; 
 
-// 🛑 שורות ה-import הוסרו. הגישה תהיה דרך האובייקט הגלובלי 'firebase'.
+// שורות ה-import הוסרו. הגישה תהיה דרך האובייקט הגלובלי 'firebase'.
 
 let currentUser = null;
 let db = null; 
 
 // -----------------------------------------------------
-// 1. ANALYTICS FUNCTIONS (שימוש בגישה גלובלית)
+// 1. ANALYTICS FUNCTIONS
 // -----------------------------------------------------
 
 async function updatePageMetrics(metric) {
-    // ⚠️ בדיקה האם ה-ID הוטמע
-    if (!db || PAGE_DOC_ID === 'PLACEHOLDER_PAGE_ID') return console.error("Firebase connection error: PAGE_DOC_ID is missing.");
+    // 🛑 בדיקה: ודא ש-db קיים ושה-ID הוזן
+    if (typeof firebase === 'undefined' || !db || PAGE_DOC_ID === 'PLACEHOLDER_PAGE_ID') return console.error("Metrics update failed: Firebase or PAGE_DOC_ID missing.");
     
     // שימוש בגישה גלובלית
     const docRef = firebase.firestore().doc("pages", PAGE_DOC_ID);
@@ -36,7 +38,6 @@ async function updatePageMetrics(metric) {
                 const pageDoc = await transaction.get(docRef);
                 if (pageDoc.exists) {
                     const data = pageDoc.data();
-                    // שימוש ב-FieldValue.increment לצורך חישוב מדויק יותר
                     const views = (data.views || 0) + (metric === 'views' ? 1 : 0);
                     const leads = (data.leads || 0) + (metric === 'leads' ? 1 : 0);
                     const conversionRate = views > 0 ? (leads / views) * 100 : 0;
@@ -49,7 +50,8 @@ async function updatePageMetrics(metric) {
         if (error.code === 'not-found') {
             const initialData = { views: 0, clicks: 0, leads: 0 };
             initialData[metric] = 1;
-            await docRef.set(initialData, { merge: true });
+            // יצירת המסמך באמצעות set
+            docRef.set(initialData, { merge: true }); 
         } else {
             console.error("Error updating page metrics:", error);
         }
@@ -60,9 +62,8 @@ async function updatePageMetrics(metric) {
 // 2. INITIALIZATION AND AUTH
 // -----------------------------------------------------
 
-// פונקציה לחיבור Firebase באמצעות הגישה הגלובלית
 function initializeFirebase() {
-    // בדיקה גלובלית: ודא ש-firebase.initializeApp קיימת
+    // 🛑 בדיקה קריטית: ודא שהאובייקט 'firebase' קיים
     if (typeof firebase === 'undefined' || typeof firebase.initializeApp === 'undefined' || PAGE_DOC_ID === 'PLACEHOLDER_PAGE_ID') {
         console.error("Firebase SDK not loaded or config incomplete.");
         return false;
@@ -102,7 +103,7 @@ function initializeFirebase() {
 // -----------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', function() {
-    // השהייה קצרה לוודא שכל ה-SDK נטען (מטפל בקצה גס)
+    // השהייה קצרה לוודא שכל ה-SDK נטען
     setTimeout(() => {
         if (!initializeFirebase()) return;
 
