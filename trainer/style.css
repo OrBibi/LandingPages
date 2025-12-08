@@ -2,8 +2,8 @@
 
 /* Define Custom Colors */
 :root {
-    --primary-light: #5cb85c; /* A vibrant green for fitness */
-    --primary-dark: #3b82f6; /* A strong blue */
+    --primary-color: #3b82f6; /* A strong blue */
+    --secondary-color: #5cb85c; /* A vibrant green for fitness */
     --accent-color: #fca311; /* A bright orange for highlights */
     --text-dark: #1f2937;
     --text-light: #4b5563;
@@ -26,33 +26,46 @@
         @apply max-w-7xl;
     }
     .btn-primary {
-        @apply inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-primary-dark hover:bg-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-dark;
+        @apply inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-primary-color hover:bg-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-color;
+        /* Custom shadow for more prominence */
+        box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
     }
     .btn-secondary {
-        @apply inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-full shadow-lg text-white hover:bg-white hover:text-primary-dark transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white;
+        @apply inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-full shadow-lg text-white hover:bg-white hover:text-primary-color transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white;
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
     }
     .form-input {
-        @apply block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-dark focus:border-primary-dark sm:text-sm transition duration-200 ease-in-out text-gray-900;
+        @apply block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm sm:text-sm transition duration-200 ease-in-out text-gray-900;
+        /* Enhanced focus state */
+        &:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Subtle glow on focus */
+        }
     }
     .service-card {
         @apply bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     }
     .icon-circle {
         @apply w-20 h-20 rounded-full flex items-center justify-center shadow-md;
     }
     .testimonial-card {
         @apply bg-white rounded-xl shadow-lg p-8 text-center border border-gray-100 relative overflow-hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     }
     .testimonial-card::before {
         content: '"';
-        @apply absolute top-4 left-4 text-6xl text-primary-light opacity-20 font-serif;
+        @apply absolute top-4 left-4 text-6xl text-secondary-color opacity-20 font-serif;
     }
     .testimonial-card::after {
         content: '"';
-        @apply absolute bottom-4 right-4 text-6xl text-primary-light opacity-20 font-serif;
+        @apply absolute bottom-4 right-4 text-6xl text-secondary-color opacity-20 font-serif;
     }
     .form-container {
         @apply relative;
+        /* Add a slightly more pronounced shadow to the form container itself */
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
     .form-container::before {
         content: '';
