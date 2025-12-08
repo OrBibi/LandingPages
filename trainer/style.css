@@ -1,0 +1,90 @@
+/* Custom CSS for a polished, professional look */
+
+/* Define Custom Colors */
+:root {
+    --primary-light: #5cb85c; /* A vibrant green for fitness */
+    --primary-dark: #3b82f6; /* A strong blue */
+    --accent-color: #fca311; /* A bright orange for highlights */
+    --text-dark: #1f2937;
+    --text-light: #4b5563;
+    --bg-light: #f9fafb;
+    --bg-dark: #e5e7eb;
+}
+
+/* Tailwind CSS Customization */
+@layer base {
+    body {
+        @apply bg-bg-light text-text-dark;
+    }
+    h1, h2, h3 {
+        @apply font-bold;
+    }
+}
+
+@layer components {
+    .container {
+        @apply max-w-7xl;
+    }
+    .btn-primary {
+        @apply inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-primary-dark hover:bg-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-dark;
+    }
+    .btn-secondary {
+        @apply inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-full shadow-lg text-white hover:bg-white hover:text-primary-dark transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white;
+    }
+    .form-input {
+        @apply block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-dark focus:border-primary-dark sm:text-sm transition duration-200 ease-in-out text-gray-900;
+    }
+    .service-card {
+        @apply bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100;
+    }
+    .icon-circle {
+        @apply w-20 h-20 rounded-full flex items-center justify-center shadow-md;
+    }
+    .testimonial-card {
+        @apply bg-white rounded-xl shadow-lg p-8 text-center border border-gray-100 relative overflow-hidden;
+    }
+    .testimonial-card::before {
+        content: '"';
+        @apply absolute top-4 left-4 text-6xl text-primary-light opacity-20 font-serif;
+    }
+    .testimonial-card::after {
+        content: '"';
+        @apply absolute bottom-4 right-4 text-6xl text-primary-light opacity-20 font-serif;
+    }
+    .form-container {
+        @apply relative;
+    }
+    .form-container::before {
+        content: '';
+        @apply absolute inset-0 bg-gradient-to-br from-blue-100 to-green-50 opacity-20 rounded-xl -z-10;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0; /* Initial state */
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0; /* Initial state */
+}
+
+/* Delay for sequential animations */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
