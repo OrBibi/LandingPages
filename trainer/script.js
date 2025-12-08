@@ -10,24 +10,23 @@ const firebaseConfig = {
     appId: "1:745990656140:web:367c261db9156b15f66ba9",
     measurementId: "G-VJGLT3ZYJ6"
 };
-const PAGE_DOC_ID = 'personal-trainer-workout'; 
+const PAGE_DOC_ID = 'o35wh9td4cfyi5h46ek7j'; 
 
-import { initializeApp } from "https://www.gstatic.com/firebase/7.10.0/firebase-app.js";
-import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebase/7.10.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, updateDoc, runTransaction, increment } from "https://www.gstatic.com/firebase/7.10.0/firebase-firestore.js";
-
+// GLOBAL FIREBASE INIT (Compat Mode)
 let userId = null;
 let db = null; 
 
 async function updatePageMetrics(field, value = 1) {
-    if (!db || PAGE_DOC_ID === 'lxvgyt9yz1k7mblffk2t2e') return console.error("PAGE_DOC_ID is missing.");
-    const docRef = doc(db, "pages", PAGE_DOC_ID);
+    if (!db || PAGE_DOC_ID === 'o35wh9td4cfyi5h46ek7j') return console.error("PAGE_DOC_ID is missing.");
+    const docRef = db.collection("pages").doc(PAGE_DOC_ID);
     try {
-        await updateDoc(docRef, { [field]: increment(value) });
+        await docRef.update({ [field]: firebase.firestore.FieldValue.increment(value) });
+        
+        // Recalculate conversion rate on views/leads
         if (field === 'leads' || field === 'views') {
-            await runTransaction(db, async (transaction) => {
+            db.runTransaction(async (transaction) => {
                 const pageDoc = await transaction.get(docRef);
-                if (pageDoc.exists()) {
+                if (pageDoc.exists) {
                     const data = pageDoc.data();
                     const views = (data.views || 0) + (field === 'views' ? value : 0);
                     const leads = (data.leads || 0) + (field === 'leads' ? value : 0);
@@ -46,11 +45,19 @@ function attachClickTracking() {
 }
 
 function initializeFirebase() {
-    if (typeof firebaseConfig === 'undefined' || PAGE_DOC_ID === 'lxvgyt9yz1k7mblffk2t2e') return false;
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    db = getFirestore(app);
-    signInAnonymously(auth).then((userCredential) => {
+    if (typeof firebase === 'undefined') {
+        console.error("Firebase SDK not loaded");
+        return false;
+    }
+    if (PAGE_DOC_ID === 'o35wh9td4cfyi5h46ek7j') return false;
+    
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    const auth = firebase.auth();
+    db = firebase.firestore();
+    
+    auth.signInAnonymously().then((userCredential) => {
         userId = userCredential.user.uid; 
         updatePageMetrics('views'); 
         attachClickTracking();
@@ -77,8 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const leadData = { ...data, userId: userId, timestamp: new Date().toISOString(), sourceUrl: window.location.href };
 
             try {
-                const pageDocRef = doc(db, "pages", PAGE_DOC_ID);
-                await addDoc(collection(pageDocRef, "leads"), leadData);
+                // Save to Subcollection using compat syntax
+                await db.collection("pages").doc(PAGE_DOC_ID).collection("leads").add(leadData);
+                
                 await updatePageMetrics('leads');
                 form.style.display = 'none';
                 if (thankYouMsg) thankYouMsg.style.display = 'block';
