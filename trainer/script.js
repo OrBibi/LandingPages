@@ -11,7 +11,7 @@ const firebaseConfig = {
     measurementId: "G-VJGLT3ZYJ6"
 };
 // ⚠️ PLACEHOLDER: THIS MUST BE REPLACED BY YOUR PLATFORM'S BACKEND WITH THE REAL ID!
-const PAGE_DOC_ID = '1wg1s7id9u2hae3uvldobp'; 
+const PAGE_DOC_ID = '1wg1s7id9u2hae3uvldobp';
 // --------------------------------------------------------------------------------
 // ⚠️ END: CONFIGURATION INJECTION
 // --------------------------------------------------------------------------------
@@ -19,10 +19,10 @@ const PAGE_DOC_ID = '1wg1s7id9u2hae3uvldobp';
 
 import { initializeApp } from "https://www.gstatic.com/firebase/7.10.0/firebase-app.js";
 import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebase/7.10.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, updateDoc, runTransaction, increment } from "https://www.gstatic.com/firebase/7.10.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc, updateDoc, runTransaction, increment, setDoc } from "https://www.gstatic.com/firebase/7.10.0/firebase-firestore.js";
 
 let userId = null;
-let db = null; 
+let db = null;
 
 // -----------------------------------------------------
 // 1. ANALYTICS FUNCTIONS
@@ -33,33 +33,45 @@ async function updatePageMetrics(field, value = 1) {
     const docRef = doc(db, "pages", PAGE_DOC_ID);
     
     try {
+        // Attempt to update the document. If it doesn't exist, this will fail.
         await updateDoc(docRef, { [field]: increment(value) });
-        // Recalculate conversion rate using a transaction
-        if (field === 'leads' || field === 'views') {
+    } catch (e) {
+        // If the document doesn't exist (e.g., 'not-found' error), create it.
+        // This ensures that the page document always exists before further operations.
+        if (e.code === 'not-found' || e.message.includes('No document to update')) {
+            console.warn(`Page document ${PAGE_DOC_ID} not found, attempting to create with initial values.`);
+            await setDoc(docRef, {
+                views: field === 'views' ? value : 0,
+                clicks: field === 'clicks' ? value : 0,
+                leads: field === 'leads' ? value : 0,
+                conversionRate: 0 // Initial conversion rate
+            }, { merge: true }); // Use merge: true to avoid overwriting if partial document exists
+        } else {
+            console.error("Error updating or creating page metrics document:", e);
+            return; // Exit if a different error occurred
+        }
+    }
+
+    // Recalculate conversion rate using a transaction if 'leads' or 'views' were updated.
+    // This transaction reads the latest 'views' and 'leads' (which now include the current increment)
+    // and updates the 'conversionRate' atomically.
+    if (field === 'leads' || field === 'views') {
+        try {
             await runTransaction(db, async (transaction) => {
                 const pageDoc = await transaction.get(docRef);
                 if (pageDoc.exists()) {
                     const data = pageDoc.data();
-                    const views = (data.views || 0) + (field === 'views' ? value : 0);
-                    const leads = (data.leads || 0) + (field === 'leads' ? value : 0);
+                    const views = data.views || 0;
+                    const leads = data.leads || 0;
                     const conversionRate = views > 0 ? (leads / views) * 100 : 0;
-                    transaction.update(docRef, { 
-                        conversionRate: parseFloat(conversionRate.toFixed(2)) 
-                    });
-                } else {
-                    // If the document doesn't exist, create it with initial values
-                    transaction.set(docRef, {
-                        views: field === 'views' ? value : 0,
-                        clicks: field === 'clicks' ? value : 0,
-                        leads: field === 'leads' ? value : 0,
-                        conversionRate: 0
+                    transaction.update(docRef, {
+                        conversionRate: parseFloat(conversionRate.toFixed(2))
                     });
                 }
             });
+        } catch (transactionError) {
+            console.error("Transaction failed to update conversionRate:", transactionError);
         }
-    } catch (e) {
-        // Doc might not exist yet; try creating it if error is 'not found'
-        console.error("Error updating metrics:", e);
     }
 }
 
@@ -85,7 +97,7 @@ function initializeFirebase() {
     // Anonymous Sign-in
     signInAnonymously(auth)
       .then((userCredential) => {
-        userId = userCredential.user.uid; 
+        userId = userCredential.user.uid;
         console.log("Analytics started for:", userId);
         updatePageMetrics('views'); // Track first view
         attachClickTracking(); // Attach click listeners
@@ -111,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            if (!userId) { 
+            if (!userId) {
                 alert('האימות נכשל. אנא טען מחדש או נסה מאוחר יותר.');
                 return;
             }
