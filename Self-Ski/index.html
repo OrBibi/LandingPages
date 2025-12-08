@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Ski - AI Ski Trip Planner</title>
+    <!-- Tailwind Warning Suppressor -->
+    <script>
+      (function() {
+        const originalWarn = console.warn;
+        console.warn = function(...args) {
+          if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
+          originalWarn.apply(console, args);
+        };
+      })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased">
+
+    <!-- Header -->
+    <header class="py-6 bg-gray-900">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <a href="#" class="text-2xl font-bold text-white">Self-Ski</a>
+            <nav>
+                <a href="https://self-ski-334698622678.us-west1.run.app/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full transition duration-300 ease-in-out shadow-lg">
+                    Launch App
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-32 text-center overflow-hidden hero-gradient">
+        <div class="absolute inset-0 z-0 opacity-20" style="background-image: url('https://image.pollinations.ai/prompt/snowy mountain peak?width=1920&height=1080&nologo=true'); background-size: cover; background-position: center;"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 text-white drop-shadow-lg">
+                Your AI-Powered Ski Trip Planner
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-3xl mx-auto drop-shadow-md">
+                Effortlessly plan your dream ski vacation, from flights to resorts, all with intelligent assistance.
+            </p>
+            <a href="https://self-ski-334698622678.us-west1.run.app/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full text-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-xl">
+                Plan Your Ski Trip Now!
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white">Smart Planning for Every Skier</h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <!-- Feature 1: Personalized Trip Planning -->
+                <div class="bg-gray-700 rounded-xl p-8 shadow-lg feature-card">
+                    <img src="images/image-3.jpg" alt="Self-Ski App Screenshot: Plan Next Trip" class="rounded-lg mb-6 shadow-md w-full h-auto object-cover">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Personalized Trip Planning</h3>
+                    <p class="text-gray-300">Let AI craft the perfect itinerary based on your preferences, skill level, and budget. Get recommendations for resorts, accommodation, and activities.</p>
+                </div>
+
+                <!-- Feature 2: Comprehensive Trip Checklist -->
+                <div class="bg-gray-700 rounded-xl p-8 shadow-lg feature-card">
+                    <img src="images/image-1.jpg" alt="Self-Ski App Screenshot: Trip Checklist" class="rounded-lg mb-6 shadow-md w-full h-auto object-cover">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Comprehensive Trip Checklist</h3>
+                    <p class="text-gray-300">Stay organized with an intelligent checklist covering flights, transfers, ski passes, gear rental, and more. Never miss a detail.</p>
+                </div>
+
+                <!-- Feature 3: Explore Top Ski Resorts -->
+                <div class="bg-gray-700 rounded-xl p-8 shadow-lg feature-card">
+                    <img src="images/image-2.jpg" alt="Self-Ski App Screenshot: Ski Resorts" class="rounded-lg mb-6 shadow-md w-full h-auto object-cover">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Explore Top Ski Resorts</h3>
+                    <p class="text-gray-300">Browse a curated selection of ski resorts worldwide with detailed information, real-time conditions, and personalized suggestions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Capture Form Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6 text-center max-w-2xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to Hit the Slopes?</h2>
+            <p class="text-lg text-gray-300 mb-10">Get exclusive updates, early access to new features, and expert tips for your next ski adventure directly to your inbox.</p>
+
+            <form id="lead-form" class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700">
+                <div class="mb-6 text-left">
+                    <label for="name" class="block text-gray-200 text-sm font-medium mb-2">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" required>
+                </div>
+                <div class="mb-8 text-left">
+                    <label for="email" class="block text-gray-200 text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="email" name="email" placeholder="your@example.com" class="w-full p-3 rounded-md bg-gray-700 border border-gray-600 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" required>
+                </div>
+                <button type="submit" id="submit-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                    Get Updates
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-gray-950 text-center text-gray-400">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2023 Self-Ski. All rights reserved.</p>
+            <p class="mt-2 text-sm">Powered by AI for the ultimate ski experience.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
