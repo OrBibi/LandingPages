@@ -1,7 +1,172 @@
+// 🛑 הוספת ההגדרות וקבועי ה-ID (הטמע ידנית!)
+const firebaseConfig = {
+    apiKey: "AIzaSyBtY_IrbV0TZLNvJ9Nr1h9UQFXygbO0zBQ",
+    authDomain: "landingpages-4d6a8.firebaseapp.com",
+    projectId: "landingpages-4d6a8",
+    storageBucket: "landingpages-4d6a8.firebasestorage.app",
+    messagingSenderId: "745990656140",
+    appId: "1:745990656140:web:367c261db9156b15f66ba9",
+    measurementId: "G-VJGLT3ZYJ6"
+};
+// ⚠️ ודא שה-ID הזה הוא ה-ID האמיתי של מסמך הדף שלך ב-Firestore
+const PAGE_DOC_ID = 'mr3jz9athyw12k7k0esb'; 
 
-// --- UI/Animation Logic (Designer Agent) ---
-document.addEventListener('DOMContentLoaded', () => {const mobileMenuButton = document.getElementById('mobile-menu-button');const mobileMenu = document.getElementById('mobile-menu');if (mobileMenuButton && mobileMenu) {mobileMenuButton.addEventListener('click', () => {mobileMenu.classList.toggle('hidden');});}document.querySelectorAll('a[href^="#"]').forEach(anchor => {anchor.addEventListener('click', function (e) {e.preventDefault();document.querySelector(this.getAttribute('href')).scrollIntoView({behavior: 'smooth'});if (!mobileMenu.classList.contains('hidden')) {mobileMenu.classList.add('hidden');}});});});
+// 🛑 שורות ה-import הוסרו. הגישה תהיה דרך האובייקט הגלובלי 'firebase'.
 
+let currentUser = null;
+let db = null; 
 
-// --- Backend/Data Logic (Integrator Agent) ---
-if (!firebase.apps.length) {    const firebaseConfig = {        apiKey: "AIzaSyBtY_IrbV0TZLNvJ9Nr1h9UQFXygbO0zBQ",        authDomain: "landingpages-4d6a8.firebaseapp.com",        projectId: "landingpages-4d6a8",        storageBucket: "landingpages-4d6a8.firebasestorage.app",        messagingSenderId: "745990656140",        appId: "1:745990656140:web:367c261db9156b15f66ba9",        measurementId: "G-VJGLT3ZYJ6"    };    firebase.initializeApp(firebaseConfig);}const db = firebase.firestore();const auth = firebase.auth();const PAGE_DOC_ID = 'mr3jz9athyw12k7k0esb';let currentUser = null;async function updatePageMetrics(metric) {    try {        await db.collection("pages").doc(PAGE_DOC_ID).update({            [metric]: firebase.firestore.FieldValue.increment(1)        });    } catch (error) {        if (error.code === 'not-found') {            const initialData = {                views: 0,                clicks: 0,                leads: 0            };            initialData[metric] = 1;            await db.collection("pages").doc(PAGE_DOC_ID).set(initialData, { merge: true });        } else {            console.error("Error updating page metrics:", error);        }    }}auth.signInAnonymously().catch((error) => {    console.error("Error signing in anonymously:", error);});auth.onAuthStateChanged((user) => {    if (user) {        currentUser = user;        updatePageMetrics('views');        document.querySelectorAll('.track-link-click').forEach(link => {            link.addEventListener('click', () => {                updatePageMetrics('clicks');            });        });        const leadForm = document.getElementById('lead-form');        const submitBtn = document.getElementById('submit-btn');        const formContainer = leadForm ? leadForm.parentElement : null;        if (leadForm && submitBtn) {            leadForm.addEventListener('submit', async (event) => {                event.preventDefault();                if (!currentUser) {                    console.error("Form submission failed: User not authenticated.");                    alert("Authentication error. Please refresh the page and try again.");                    return;                }                const originalButtonText = submitBtn.textContent;                submitBtn.textContent = "Sending...";                submitBtn.disabled = true;                const data = {};                const inputs = leadForm.querySelectorAll('input, textarea');                inputs.forEach(input => {                    if (input.name) {                        data[input.name] = input.value;                    }                });                data.timestamp = firebase.firestore.FieldValue.serverTimestamp();                data.userId = currentUser.uid;                try {                    await db.collection("pages").doc(PAGE_DOC_ID).collection("leads").add(data);                    updatePageMetrics('leads');                    if (formContainer) {                        leadForm.style.display = 'none';                        const successMessage = document.createElement('div');                        successMessage.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-8';                        successMessage.setAttribute('role', 'alert');                        successMessage.innerHTML = '<strong class="font-bold">Success!</strong><span class="block sm:inline"> Your consultation request has been sent. We\'ll be in touch shortly!</span>';                        formContainer.appendChild(successMessage);                    } else {                        leadForm.innerHTML = '<p class="text-green-600 font-bold">Thank you! Your request has been sent.</p>';                    }                } catch (error) {                    console.error("Error submitting lead:", error);                    alert("There was an error submitting your request. Please try again.");                } finally {                    submitBtn.textContent = originalButtonText;                    submitBtn.disabled = false;                }            });        }    } else {        currentUser = null;    }}); 
+// -----------------------------------------------------
+// 1. ANALYTICS FUNCTIONS (שימוש בגישה גלובלית)
+// -----------------------------------------------------
+
+async function updatePageMetrics(metric) {
+    // ⚠️ בדיקה האם ה-ID הוטמע
+    if (!db || PAGE_DOC_ID === 'PLACEHOLDER_PAGE_ID') return console.error("Firebase connection error: PAGE_DOC_ID is missing.");
+    
+    // שימוש בגישה גלובלית
+    const docRef = firebase.firestore().doc("pages", PAGE_DOC_ID);
+    
+    try {
+        await docRef.update({ [metric]: firebase.firestore.FieldValue.increment(1) });
+        
+        // חישוב יחס המרה (Conversion Rate)
+        if (metric === 'leads' || metric === 'views') {
+            await firebase.firestore().runTransaction(async (transaction) => {
+                const pageDoc = await transaction.get(docRef);
+                if (pageDoc.exists) {
+                    const data = pageDoc.data();
+                    // שימוש ב-FieldValue.increment לצורך חישוב מדויק יותר
+                    const views = (data.views || 0) + (metric === 'views' ? 1 : 0);
+                    const leads = (data.leads || 0) + (metric === 'leads' ? 1 : 0);
+                    const conversionRate = views > 0 ? (leads / views) * 100 : 0;
+                    transaction.update(docRef, { conversionRate: parseFloat(conversionRate.toFixed(2)) });
+                }
+            });
+        }
+    } catch (error) {
+        // טיפול במקרה שהמסמך לא קיים (Not Found)
+        if (error.code === 'not-found') {
+            const initialData = { views: 0, clicks: 0, leads: 0 };
+            initialData[metric] = 1;
+            await docRef.set(initialData, { merge: true });
+        } else {
+            console.error("Error updating page metrics:", error);
+        }
+    }
+}
+
+// -----------------------------------------------------
+// 2. INITIALIZATION AND AUTH
+// -----------------------------------------------------
+
+// פונקציה לחיבור Firebase באמצעות הגישה הגלובלית
+function initializeFirebase() {
+    // בדיקה גלובלית: ודא ש-firebase.initializeApp קיימת
+    if (typeof firebase === 'undefined' || typeof firebase.initializeApp === 'undefined' || PAGE_DOC_ID === 'PLACEHOLDER_PAGE_ID') {
+        console.error("Firebase SDK not loaded or config incomplete.");
+        return false;
+    }
+    
+    const app = firebase.initializeApp(firebaseConfig); 
+    const auth = firebase.auth();
+    db = firebase.firestore();
+
+    // כניסה אנונימית והמתנה לאימות
+    auth.signInAnonymously().catch((error) => {
+        console.error("Error signing in anonymously:", error);
+    });
+
+    // המתנה לשינוי סטטוס האימות (שיוך משתמש אנונימי)
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            currentUser = user;
+            updatePageMetrics('views'); // מעקב צפייה ראשוני
+            
+            // חיבור מעקבי לחיצות לאחר אימות המשתמש
+            document.querySelectorAll('.track-link-click').forEach(link => {
+                link.addEventListener('click', () => {
+                    updatePageMetrics('clicks');
+                });
+            });
+        } else {
+            currentUser = null;
+        }
+    });
+
+    return true;
+}
+
+// -----------------------------------------------------
+// 3. FORM SUBMISSION HANDLER
+// -----------------------------------------------------
+
+document.addEventListener('DOMContentLoaded', function() {
+    // השהייה קצרה לוודא שכל ה-SDK נטען (מטפל בקצה גס)
+    setTimeout(() => {
+        if (!initializeFirebase()) return;
+
+        const form = document.getElementById('lead-form');
+        const thankYouMsg = document.getElementById('thank-you-msg');
+        const submitBtn = document.getElementById('submit-btn');
+        const formContainer = form ? form.parentElement : null;
+
+        if (form && submitBtn) {
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                
+                if (!currentUser) {
+                    console.error("Form submission failed: User not authenticated.");
+                    alert("Authentication error. Please refresh the page and try again.");
+                    return;
+                }
+                
+                const originalButtonText = submitBtn.textContent;
+                submitBtn.textContent = "Sending...";
+                submitBtn.disabled = true;
+
+                const data = {};
+                const inputs = form.querySelectorAll('input, textarea');
+                inputs.forEach(input => {
+                    if (input.name) {
+                        data[input.name] = input.value;
+                    }
+                });
+                
+                const leadData = {
+                    ...data,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    userId: currentUser.uid,
+                    sourceUrl: window.location.href, // שמירת ה-URL המלא
+                };
+
+                try {
+                    // שמירת הליד לקולקציית המשנה
+                    await db.collection("pages").doc(PAGE_DOC_ID).collection("leads").add(leadData);
+                    
+                    // עדכון מונה הלידים והמרת יחס
+                    await updatePageMetrics('leads');
+                    
+                    // הצלחה: הסתרת הטופס והצגת הודעת תודה
+                    form.style.display = 'none';
+                    if (thankYouMsg) {
+                        thankYouMsg.style.display = 'block';
+                    } else if (formContainer) {
+                        // אם אין אלמנט thank-you-msg, יוצרים הודעה דינמית
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-8';
+                        successMessage.innerHTML = '<strong class="font-bold">Success!</strong><span class="block sm:inline"> Your request has been sent.</span>';
+                        formContainer.appendChild(successMessage);
+                    }
+
+                } catch (error) {
+                    console.error("Error submitting lead:", error);
+                    alert("There was an error submitting your request. Please try again.");
+                } finally {
+                    submitBtn.textContent = originalButtonText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+    }, 500);
+});
