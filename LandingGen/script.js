@@ -1,1 +1,0 @@
-// UI Logic Only - Form submission handled by backend systemdocument.addEventListener('DOMContentLoaded', () => {console.log('LandingGen Page Loaded');});
