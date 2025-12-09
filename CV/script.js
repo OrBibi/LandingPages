@@ -1,15 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('lead-form');
-    const thankYouMsg = document.getElementById('thank-you-msg');
-
-    if (form) {
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            form.style.display = 'none';
-            thankYouMsg.style.display = 'block';
-
-            thankYouMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-    }
+    // Form submission logic removed as per user request.
+    // The #thank-you-msg div remains for compliance but is not triggered visually.
 });
