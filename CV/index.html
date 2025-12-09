@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Or Bibi - Modern Resume</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="hero-section">
+        <div class="container hero-content">
+            <img src="images/image-0.jpg" alt="Or Bibi Profile Picture" class="profile-pic">
+            <h1>Or Bibi</h1>
+            <p class="tagline">Computer Science Student | Passionate Developer | Problem Solver</p>
+            <div class="contact-links">
+                <a href="mailto:orbibior@gmail.com" class="contact-link">orbibior@gmail.com</a>
+                <a href="tel:0584455881" class="contact-link">058-4455881</a>
+                <a href="https://www.linkedin.com/in/orbibi" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
+                <a href="https://github.com/orbibi" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="section summary-section">
+            <div class="section-header">
+                <h2>Summary</h2>
+            </div>
+            <p>Final year student in Computer Science. I'm a self-learner, diligent and hard worker, passionate about programming, creating and problem solving with good analytical skills. I work well both in a team and independently. Looking for my first step into the industry.</p>
+        </section>
+
+        <section class="section education-section">
+            <div class="section-header">
+                <h2>Education</h2>
+            </div>
+            <div class="education-item">
+                <h3>Ariel University - B.Sc. in Computer Science, Cybersecurity Track</h3>
+                <p class="date-range">2023-today</p>
+                <ul>
+                    <li>First year - Dean’s list</li>
+                    <li>GPA: 95.31</li>
+                    <li>Courses: Algorithms 1 (100), Digital Logic System (100), Databases (100), Computer Architecture (99), Algorithms 2 (97), Cybersecurity Lab (99)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section skills-section">
+            <div class="section-header">
+                <h2>Technical Skills</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skills-category">
+                    <h3>Programming Languages</h3>
+                    <p>Java, Python, C, C++</p>
+                </div>
+                <div class="skills-category">
+                    <h3>Tools &amp; Platforms</h3>
+                    <p>Linux, GitHub, SQL, NoSQL</p>
+                </div>
+                <div class="skills-category">
+                    <h3>AI</h3>
+                    <p>Machine Learning (ML) and Natural Language Processing (NLP), AI Agent Architecture, and Vibe Coding for end-to-end dynamic application integration.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section experience-projects-section">
+            <div class="section-header">
+                <h2>Experience (Projects)</h2>
+            </div>
+            <div class="project-item">
+                <h3>Phishing SMS Classifier System</h3>
+                <p>Developed a machine learning model to classify short text messages (SMS) as "Ham" or "Spam," leveraging TF-IDF for Vectorization and Random Forest for Classification. The model achieved a strong 0.95 Macro Average Recall and 97.67% overall accuracy on the test set. <a href="#" target="_blank" rel="noopener noreferrer">GitHub_Link</a></p>
+            </div>
+            <div class="project-item">
+                <h3>Library Management System</h3>
+                <p>This project allows librarians to manage books, members, and borrowing processes while implementing design patterns for maintainability and scalability, Strong OOP Project. <a href="#" target="_blank" rel="noopener noreferrer">GitHub_Link</a></p>
+            </div>
+            <div class="project-item">
+                <h3>Traffic Analysis and Application Identification</h3>
+                <p>Analyses and compares basic data metrics across recordings and generates various graphs illustrating different analyses such as total packet numbers, data volume in bytes, and more. <a href="#" target="_blank" rel="noopener noreferrer">GitHub_Link</a></p>
+            </div>
+            <div class="project-item">
+                <h3>Ski trips planner</h3>
+                <p>A complete and working app that helps you (with ai agent) plan your next ski vacation, built with vibe coding and AI agent creation (to plan the trips and to create new ski resort "cards"). <a href="#" target="_blank" rel="noopener noreferrer">App_Link</a></p>
+            </div>
+        </section>
+
+        <section class="section experience-work-section">
+            <div class="section-header">
+                <h2>Experience (Work)</h2>
+            </div>
+            <div class="work-item">
+                <h3>Leaders App Company - Substitute tutor, teaching programming in Java and Python</h3>
+                <p class="date-range">2024-2025</p>
+            </div>
+        </section>
+
+        <section class="section military-service-section">
+            <div class="section-header">
+                <h2>Military Service</h2>
+            </div>
+            <div class="military-item">
+                <h3>Active Reserves – Officer (captaincy), Reconnaissance Battalion 7016</h3>
+                <p class="date-range">2022-today</p>
+            </div>
+            <div class="military-item">
+                <h3>Special Forces Palsar 7 – Officer</h3>
+                <p class="date-range">2017-2022</p>
+                <ul>
+                    <li>Completed course with distinction</li>
+                    <li>Transitioned through the “Stars” track to commanders’ course and officer training</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <h2>Get in Touch</h2>
+            <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            <form id="lead-form" class="contact-form">
+                <input type="text" name="name" placeholder="Your Name" aria-label="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" aria-label="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" aria-label="Your Message"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="thank-you-msg" style="display: none;" class="thank-you-box">
+                <h2 class="thank-you-title">Thank you! Your message has been sent.</h2>
+                <p>I'll get back to you as soon as possible.</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/orbibi" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/orbibi" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:orbibior@gmail.com">Email Me</a>
+            </div>
+            <p class="copyright">&copy; 2024 Or Bibi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
