@@ -1,0 +1,1 @@
+// No visual JavaScript required for this page's current design elements. // If interactive elements like a mobile menu or scroll animations were added, logic would go here.
