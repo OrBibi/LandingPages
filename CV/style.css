@@ -305,62 +305,6 @@ ul li::before {
     margin-right: auto;
 }
 
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin: 0 auto 40px auto;
-}
-
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
-    padding: 14px 18px;
-    border: 1px solid #555;
-    border-radius: var(--border-radius-small);
-    background-color: #3a475a;
-    color: var(--text-light);
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: #bbb;
-    opacity: 0.7;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-    background-color: #445069;
-}
-
-.contact-form button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 14px 30px;
-    border-radius: var(--border-radius-small);
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    align-self: center;
-    width: auto;
-    min-width: 180px;
-    letter-spacing: 0.5px;
-}
-
-.contact-form button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
 .thank-you-box {
     margin-top: 30px;
     background-color: var(--accent-color);
@@ -486,12 +430,6 @@ ul li::before {
     }
     ul li::before {
         font-size: 1em;
-    }
-    .contact-form input,
-    .contact-form textarea,
-    .contact-form button {
-        padding: 12px 15px;
-        font-size: 0.95em;
     }
     .site-footer {
         padding: 40px 20px;
