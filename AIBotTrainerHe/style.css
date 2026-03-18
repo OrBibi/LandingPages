@@ -510,3 +510,56 @@ body {
         font-size: 1em; 
     }
 }
+/* Keyframes for the pulse effect */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 193, 7, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+    }
+}
+
+/* Floating CTA Button Styles with animation */
+.floating-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-decoration: none;
+    z-index: 9999;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    animation: pulse 2s infinite; /* Adds the pulse effect */
+}
+
+/* Hover effect for desktop */
+.floating-btn:hover {
+    transform: scale(1.05);
+    background-color: #e0ac00;
+    animation: none; /* Stops pulsing when hovered */
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .floating-btn {
+        top: auto;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: max-content;
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    .floating-btn:hover {
+        transform: translateX(-50%) scale(1.05);
+    }
+}
