@@ -1,144 +1,614 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Or Bibi - Modern Resume</title>
+    <meta name="description" content="Or Bibi - Computer Science student, software developer, and cybersecurity enthusiast.">
+    <title>Or Bibi | Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="hero-section">
-        <div class="container hero-content">
-            <img src="images/image-0.jpg" alt="Or Bibi Profile Picture" class="profile-pic">
+    <nav class="navbar" id="navbar">
+        <div class="container nav-inner">
+            <a href="#hero" class="nav-logo">Or Bibi</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <span class="theme-icon theme-icon-sun" aria-hidden="true">&#9728;</span>
+                <span class="theme-icon theme-icon-moon" aria-hidden="true">&#9790;</span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content reveal">
+            <img src="images/image-0.jpg" alt="Or Bibi profile picture" class="profile-pic">
+            <p class="hero-greeting">Hello, I'm</p>
             <h1>Or Bibi</h1>
-            <p class="tagline">Computer Science Student | Passionate Developer | Problem Solver</p>
+            <p class="tagline">3rd Year CS Student &middot; Software Developer &middot; Cybersecurity Track</p>
+            <p class="hero-location">Petah Tikva, Israel</p>
+            <div class="hero-actions">
+                <a href="Or Bibi CV + Grades.pdf" class="btn btn-primary" download>Download CV</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
             <div class="contact-links">
-                <a href="mailto:orbibior@gmail.com" class="contact-link">orbibior@gmail.com</a>
-                <a href="tel:0584455881" class="contact-link">058-4455881</a>
-                <a href="https://www.linkedin.com/in/orbibi" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
-                <a href="https://github.com/orbibi" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
+                <a href="mailto:orbibics@gmail.com" class="contact-chip" aria-label="Email">
+                    <span class="chip-label">Email</span>
+                    <span class="chip-value">orbibics@gmail.com</span>
+                </a>
+                <a href="tel:0584455881" class="contact-chip" aria-label="Phone">
+                    <span class="chip-label">Phone</span>
+                    <span class="chip-value">058-4455881</span>
+                </a>
+                <a href="https://www.linkedin.com/in/orbibi" target="_blank" rel="noopener noreferrer" class="contact-chip">
+                    <span class="chip-label">LinkedIn</span>
+                    <span class="chip-value">View Profile</span>
+                </a>
+                <a href="https://github.com/OrBibi" target="_blank" rel="noopener noreferrer" class="contact-chip">
+                    <span class="chip-label">GitHub</span>
+                    <span class="chip-value">OrBibi</span>
+                </a>
             </div>
         </div>
     </header>
 
     <main class="content-wrapper">
-        <section class="section summary-section">
+        <section class="section reveal" id="about">
             <div class="section-header">
+                <span class="section-label">About</span>
                 <h2>Summary</h2>
             </div>
-            <p>Final year student in Computer Science. I'm a self-learner, diligent and hard worker, passionate about programming, creating and problem solving with good analytical skills. I work well both in a team and independently. Looking for my first step into the industry.</p>
+            <p class="lead">
+                A highly motivated and creative 3rd year computer science student with hands-on experience in
+                low-level programming and a strong passion for continuous learning and problem solving. I'm a fast
+                learner with strong analytical skills — diligent and hardworking, able to work effectively both
+                independently and as part of a team. Looking for my first step into the industry.
+            </p>
         </section>
 
-        <section class="section education-section">
+        <section class="section reveal" id="education">
             <div class="section-header">
-                <h2>Education</h2>
+                <span class="section-label">Education</span>
+                <h2>Academic Background</h2>
             </div>
-            <div class="education-item">
-                <h3>Ariel University - B.Sc. in Computer Science, Cybersecurity Track</h3>
-                <p class="date-range">2023-today</p>
-                <ul>
-                    <li>First year - Dean’s list</li>
-                    <li>GPA: 95.31</li>
-                    <li>Courses: Algorithms 1 (100), Digital Logic System (100), Databases (100), Computer Architecture (99), Algorithms 2 (97), Cybersecurity Lab (99)</li>
-                </ul>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>Ariel University &mdash; B.Sc. Computer Science, Cybersecurity Track</h3>
+                    <p class="date-range">2023 &ndash; Present</p>
+                    <div class="highlight-badge">GPA: 95.51</div>
+                    <ul>
+                        <li>Rector's List &mdash; 2025 (Second Year)</li>
+                        <li>Dean's List &mdash; 2024 (First Year)</li>
+                        <li>Top courses: Algorithms 1 (100), Algorithms 2 (97), Operating Systems (100), Databases (100), Digital Logic (100), Computer Architecture (99), Probability 1 (100), Calculus 1 (100), Networks (98), Cyber Lab (99)</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <section class="section skills-section">
+        <section class="section reveal" id="awards">
             <div class="section-header">
+                <span class="section-label">Recognition</span>
+                <h2>Awards & Languages</h2>
+            </div>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <span class="award-year">2025</span>
+                    <h3>Rector's List</h3>
+                    <p>Second year academic excellence at Ariel University</p>
+                </div>
+                <div class="award-card">
+                    <span class="award-year">2024</span>
+                    <h3>Dean's List</h3>
+                    <p>First year academic excellence at Ariel University</p>
+                </div>
+                <div class="award-card">
+                    <span class="award-year">2018</span>
+                    <h3>Excellence Award</h3>
+                    <p>IDF service distinction</p>
+                </div>
+                <div class="award-card">
+                    <span class="award-year">Lang</span>
+                    <h3>Languages</h3>
+                    <p>Hebrew &mdash; Fluent<br>English &mdash; Working Proficiency</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="skills">
+            <div class="section-header">
+                <span class="section-label">Skills</span>
                 <h2>Technical Skills</h2>
             </div>
             <div class="skills-grid">
-                <div class="skills-category">
-                    <h3>Programming Languages</h3>
-                    <p>Java, Python, C, C++</p>
+                <div class="skill-card">
+                    <h3>Languages</h3>
+                    <div class="tag-list">
+                        <span class="tag">Python</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">C</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">TypeScript</span>
+                    </div>
                 </div>
-                <div class="skills-category">
-                    <h3>Tools &amp; Platforms</h3>
-                    <p>Linux, GitHub, SQL, NoSQL</p>
+                <div class="skill-card">
+                    <h3>Web & Backend</h3>
+                    <div class="tag-list">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">Git</span>
+                    </div>
                 </div>
-                <div class="skills-category">
-                    <h3>AI</h3>
-                    <p>Machine Learning (ML) and Natural Language Processing (NLP), AI Agent Architecture, and Vibe Coding for end-to-end dynamic application integration.</p>
+                <div class="skill-card">
+                    <h3>Databases</h3>
+                    <div class="tag-list">
+                        <span class="tag">SQL</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">Neo4j</span>
+                        <span class="tag">Cassandra</span>
+                        <span class="tag">Elasticsearch</span>
+                        <span class="tag">Spark</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>AI & ML</h3>
+                    <div class="tag-list">
+                        <span class="tag">RAG</span>
+                        <span class="tag">NLP / TF-IDF</span>
+                        <span class="tag">AI Agents</span>
+                        <span class="tag">Random Forest</span>
+                        <span class="tag">OOP</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section experience-projects-section">
+        <section class="section reveal" id="experience">
             <div class="section-header">
-                <h2>Experience (Projects)</h2>
+                <span class="section-label">Experience</span>
+                <h2>Work Experience</h2>
             </div>
-            <div class="project-item">
-                <h3>Landing Page app</h3>
-                <p>A complete and working app that helps you (with ai agent) create landing pages the app created with vibe coding + self coding the app include AI Agent Architecture (2 agents). <a href="https://landinggen-ai-991120592446.us-west1.run.app/" target="_blank" rel="noopener noreferrer">App_Link</a></p>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>Texas Instruments &mdash; Software Developer Intern</h3>
+                    <p class="date-range">2025 &ndash; Present</p>
+                    <p>Building a library that connects TI's chips to other company tools.</p>
+                </div>
             </div>
-            <div class="project-item">
-                <h3>Phishing SMS Classifier System</h3>
-                <p>Developed a machine learning model to classify short text messages (SMS) as "Ham" or "Spam," leveraging TF-IDF for Vectorization and Random Forest for Classification. The model achieved a strong 0.95 Macro Average Recall and 97.67% overall accuracy on the test set. <a href="https://github.com/OrBibi/Phishing-SMS-Classifier-System" target="_blank" rel="noopener noreferrer">GitHub_Link</a></p>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>Leaders App Company &mdash; Substitute Tutor</h3>
+                    <p class="date-range">2024 &ndash; 2025</p>
+                    <p>Teaching programming in Java and Python.</p>
+                </div>
             </div>
-            <div class="project-item">
-                <h3>Library Management System</h3>
-                <p>This project allows librarians to manage books, members, and borrowing processes while implementing design patterns for maintainability and scalability, Strong OOP Project. <a href="https://github.com/OrBibi/OOP_Library_mannage" target="_blank" rel="noopener noreferrer">GitHub_Link</a></p>
-            </div>
-            <div class="project-item">
-                <h3>Traffic Analysis and Application Identification</h3>
-                <p>Analyses and compares basic data metrics across recordings and generates various graphs illustrating different analyses such as total packet numbers, data volume in bytes, and more. <a href="https://github.com/OrBibi/Final_Project_network" target="_blank" rel="noopener noreferrer">GitHub_Link</a></p>
-            </div>
-            <div class="project-item">
-                <h3>Ski trips planner</h3>
-                <p>A complete and working app that helps you (with ai agent) plan your next ski vacation, built with vibe coding and AI agent creation (to plan the trips and to create new ski resort "cards"). <a href="https://self-ski-334698622678.us-west1.run.app/" target="_blank" rel="noopener noreferrer">App_Link</a></p>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>IDF &mdash; Officer, Palsar 7 & Battalion 7016</h3>
+                    <p class="date-range">2017 &ndash; Present (Active Reserves)</p>
+                    <p>Strong management and multitasking skills with the ability to work effectively under pressure. Completed course with distinction; transitioned through the "Stars" track to commanders' course and officer training.</p>
+                </div>
             </div>
         </section>
 
-        <section class="section experience-work-section">
+        <section class="section reveal" id="projects">
             <div class="section-header">
-                <h2>Experience (Work)</h2>
+                <span class="section-label">Portfolio</span>
+                <h2>Projects</h2>
             </div>
-            <div class="work-item">
-                <h3>Leaders App Company - Substitute tutor, teaching programming in Java and Python</h3>
-                <p class="date-range">2024-2025</p>
+            <div class="filter-tabs" role="tablist" aria-label="Filter projects by category">
+                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+                <button class="filter-btn" data-filter="ai-ml" role="tab" aria-selected="false">AI & ML</button>
+                <button class="filter-btn" data-filter="cyber" role="tab" aria-selected="false">Agents & Cyber</button>
+                <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web Apps</button>
+                <button class="filter-btn" data-filter="algorithms" role="tab" aria-selected="false">Algorithms</button>
+                <button class="filter-btn" data-filter="oop" role="tab" aria-selected="false">OOP & Design</button>
             </div>
-        </section>
+            <div class="projects-grid" id="projects-grid">
+                <!-- AI & ML -->
+                <article class="project-card" data-category="ai-ml">
+                    <div class="project-card-header">
+                        <span class="project-category">AI & ML</span>
+                        <h3>AI Fitness Bot</h3>
+                    </div>
+                    <p>Telegram bot that creates personalized training programs and adapts them to the trainee's requests. Hallucinations are prevented using RAG with Firebase as the database.</p>
+                    <div class="tag-list">
+                        <span class="tag">RAG</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Telegram</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://t.me/Bibi_Fitness_Bot" target="_blank" rel="noopener noreferrer">Live App</a>
+                    </div>
+                </article>
 
-        <section class="section military-service-section">
-            <div class="section-header">
-                <h2>Military Service</h2>
+                <article class="project-card" data-category="ai-ml">
+                    <div class="project-card-header">
+                        <span class="project-category">AI & ML</span>
+                        <h3>Traffic Analysis & App Identification</h3>
+                    </div>
+                    <p>Split a network of 128 applications using only 5 samples per application, using CNN and 5-Fold Ensemble classification.</p>
+                    <div class="tag-list">
+                        <span class="tag">CNN</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Ensemble</span>
+                    </div>
+                    <p class="project-note">Private project — the repository can't be shared publicly because of the dataset.</p>
+                </article>
+
+                <article class="project-card" data-category="ai-ml">
+                    <div class="project-card-header">
+                        <span class="project-category">AI & ML</span>
+                        <h3>Phishing SMS Classifier</h3>
+                    </div>
+                    <p>ML model classifying SMS as Ham or Spam using TF-IDF vectorization and Random Forest. Achieved 0.95 macro recall and 97.67% accuracy.</p>
+                    <div class="tag-list">
+                        <span class="tag">TF-IDF</span>
+                        <span class="tag">Random Forest</span>
+                        <span class="tag">NLP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/Phishing-SMS-Classifier-System" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="ai-ml">
+                    <div class="project-card-header">
+                        <span class="project-category">AI & ML</span>
+                        <span class="project-badge">3rd Place</span>
+                        <h3>Hospital Shift Scheduler</h3>
+                    </div>
+                    <p>Hackathon project for "AI For Life" 2026. Accepts shift constraints in natural language and converts them into rigid constraints using LLM.</p>
+                    <div class="tag-list">
+                        <span class="tag">LLM</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">Hackathon</span>
+                    </div>
+                </article>
+
+                <!-- Agents & Cybersecurity -->
+                <article class="project-card" data-category="cyber">
+                    <div class="project-card-header">
+                        <span class="project-category">Cyber</span>
+                        <h3>Malware Agent</h3>
+                    </div>
+                    <p>Autonomous agent for continual malware detection with independent decision-making capabilities.</p>
+                    <div class="tag-list">
+                        <span class="tag">Python</span>
+                        <span class="tag">AI Agent</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/Malware-Agent" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="cyber">
+                    <div class="project-card-header">
+                        <span class="project-category">Cyber</span>
+                        <h3>Telegram Spam Agent</h3>
+                    </div>
+                    <p>Autonomous AI agent to identify and filter spam and phishing threats in real time, built on the MCP governance framework.</p>
+                    <div class="tag-list">
+                        <span class="tag">MCP</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">AI Agent</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/Telegram-spam-agent" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="cyber">
+                    <div class="project-card-header">
+                        <span class="project-category">Cyber</span>
+                        <h3>Ransomware Detection</h3>
+                    </div>
+                    <p>Real-time monitoring tool that detects suspicious changes to text-based files, designed to catch early signs of ransomware activity.</p>
+                    <div class="tag-list">
+                        <span class="tag">Python</span>
+                        <span class="tag">Monitoring</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/Ransomware-detect" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="cyber">
+                    <div class="project-card-header">
+                        <span class="project-category">Cyber</span>
+                        <h3>Evil Twin Attack</h3>
+                    </div>
+                    <p>Security research project exploring evil twin Wi-Fi attack vectors and detection methods.</p>
+                    <div class="tag-list">
+                        <span class="tag">Python</span>
+                        <span class="tag">Wi-Fi Security</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/evil_twin" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="cyber">
+                    <div class="project-card-header">
+                        <span class="project-category">Cyber</span>
+                        <h3>API GNN Detection</h3>
+                    </div>
+                    <p>Graph Neural Network based approach for API-level threat detection and analysis.</p>
+                    <div class="tag-list">
+                        <span class="tag">GNN</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/API_GNN_Detection" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="cyber">
+                    <div class="project-card-header">
+                        <span class="project-category">Cyber</span>
+                        <span class="project-badge">OWASP</span>
+                        <h3>Untrust-TS &middot; Secure FS</h3>
+                    </div>
+                    <p>TypeScript/JavaScript security library that prevents Path Traversal and Symlink Escape attacks by replacing raw filesystem paths with validated sandbox tokens. Published under the OWASP-untrust organization.</p>
+                    <div class="tag-list">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">OWASP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/owasp-untrust/boxed_path_js" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="cyber">
+                    <div class="project-card-header">
+                        <span class="project-category">Cyber</span>
+                        <h3>Network Analysis</h3>
+                    </div>
+                    <p>Network traffic analysis project exploring and processing captured network data.</p>
+                    <div class="tag-list">
+                        <span class="tag">Python</span>
+                        <span class="tag">Networking</span>
+                        <span class="tag">Analysis</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/Final_Project_network" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <!-- Web Apps -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-header">
+                        <span class="project-category">Web App</span>
+                        <h3>PickPics</h3>
+                    </div>
+                    <p>Full-stack wedding photo sharing platform allowing guests to upload and browse event photos via QR codes.</p>
+                    <div class="tag-list">
+                        <span class="tag">Full-Stack</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Firebase</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://pickpics.co.il" target="_blank" rel="noopener noreferrer">Live Site</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="web">
+                    <div class="project-card-header">
+                        <span class="project-category">Web App</span>
+                        <h3>Wedding RSVP</h3>
+                    </div>
+                    <p>Full-stack web app for managing wedding guest lists, collecting RSVPs via public links, and scheduling automated reminder messages.</p>
+                    <div class="tag-list">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Full-Stack</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/WeddingRSVP" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="web">
+                    <div class="project-card-header">
+                        <span class="project-category">Web App</span>
+                        <h3>Landing Page Generator</h3>
+                    </div>
+                    <p>AI-powered app that creates landing pages using a dual-agent architecture. Built with vibe coding and custom agent integration.</p>
+                    <div class="tag-list">
+                        <span class="tag">AI Agents</span>
+                        <span class="tag">Vibe Coding</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://landinggen-ai-991120592446.us-west1.run.app/" target="_blank" rel="noopener noreferrer">Live App</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="web">
+                    <div class="project-card-header">
+                        <span class="project-category">Web App</span>
+                        <h3>AI Bot Trainer Landing</h3>
+                    </div>
+                    <p>Marketing landing page for the Bibi Fitness Bot — AI-powered fitness and nutrition coaching on Telegram.</p>
+                    <div class="tag-list">
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">Landing Page</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://aifitnessil.com/" target="_blank" rel="noopener noreferrer">Live Site</a>
+                    </div>
+                </article>
+
+                <!-- Algorithms -->
+                <article class="project-card" data-category="algorithms">
+                    <div class="project-card-header">
+                        <span class="project-category">Algorithms</span>
+                        <h3>Graphs & Algorithms</h3>
+                    </div>
+                    <p>Undirected graph with adjacency list implementing BFS, DFS, Dijkstra, Prim, and Kruskal algorithms with dynamic data structure helpers.</p>
+                    <div class="tag-list">
+                        <span class="tag">C++</span>
+                        <span class="tag">Graph Theory</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/Graphs-and-algorithms" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="algorithms">
+                    <div class="project-card-header">
+                        <span class="project-category">Algorithms</span>
+                        <h3>Convex Hull</h3>
+                    </div>
+                    <p>Computational geometry implementation for finding the convex hull of a set of points.</p>
+                    <div class="tag-list">
+                        <span class="tag">C++</span>
+                        <span class="tag">Geometry</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/ConvexHull" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="algorithms">
+                    <div class="project-card-header">
+                        <span class="project-category">Algorithms</span>
+                        <h3>Square Matrix Library</h3>
+                    </div>
+                    <p>C++ library for square matrix operations including addition, multiplication, determinant, transpose, and more with operator overloading.</p>
+                    <div class="tag-list">
+                        <span class="tag">C++</span>
+                        <span class="tag">Linear Algebra</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/SquareMatrix" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <!-- OOP & Software Design -->
+                <article class="project-card" data-category="oop">
+                    <div class="project-card-header">
+                        <span class="project-category">OOP</span>
+                        <h3>Library Management System</h3>
+                    </div>
+                    <p>Manages books, members, and borrowing processes with design patterns for maintainability and scalability.</p>
+                    <div class="tag-list">
+                        <span class="tag">Java</span>
+                        <span class="tag">Design Patterns</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/OOP_Library_mannage" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="oop">
+                    <div class="project-card-header">
+                        <span class="project-category">OOP</span>
+                        <h3>Coup Board Game</h3>
+                    </div>
+                    <p>Full-featured C++ implementation of the board game Coup with complete game logic and player interactions.</p>
+                    <div class="tag-list">
+                        <span class="tag">C++</span>
+                        <span class="tag">Game Dev</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/CoupGame" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="oop">
+                    <div class="project-card-header">
+                        <span class="project-category">OOP</span>
+                        <h3>Reversi Game</h3>
+                    </div>
+                    <p>Reversi game with bombs and unflippable discs — a creative twist on the classic board game.</p>
+                    <div class="tag-list">
+                        <span class="tag">Java</span>
+                        <span class="tag">OOP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/OOP_Reversi" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="oop">
+                    <div class="project-card-header">
+                        <span class="project-category">OOP</span>
+                        <h3>Brokerage Office</h3>
+                    </div>
+                    <p>Object-oriented brokerage office management system demonstrating software design principles.</p>
+                    <div class="tag-list">
+                        <span class="tag">Java</span>
+                        <span class="tag">OOP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/OrBibi/OOP_Brokerage-office" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
             </div>
-            <div class="military-item">
-                <h3>Active Reserves – Officer (captaincy), Reconnaissance Battalion 7016</h3>
-                <p class="date-range">2022-today</p>
-            </div>
-            <div class="military-item">
-                <h3>Special Forces Palsar 7 – Officer</h3>
-                <p class="date-range">2017-2022</p>
-                <ul>
-                    <li>Completed course with distinction</li>
-                    <li>Transitioned through the “Stars” track to commanders’ course and officer training</li>
-                </ul>
-            </div>
+            <p class="projects-empty" id="projects-empty" hidden>No projects in this category.</p>
         </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" id="contact">
         <div class="container footer-content">
-            <h2>Get in Touch</h2>
-            <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
-            <form id="lead-form" style="display: none;">
-                <!-- Form fields would go here if it were visible -->
-            </form>
-            <div id="thank-you-msg" style="display: none;" class="thank-you-box">
-                <h2 class="thank-you-title">Thank you! Your message has been sent.</h2>
-                <p>I'll get back to you as soon as possible.</p>
+            <div class="section-header">
+                <span class="section-label">Contact</span>
+                <h2>Get in Touch</h2>
             </div>
+            <p class="footer-lead">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+
+            <div class="contact-actions">
+                <a href="mailto:orbibics@gmail.com" class="contact-action contact-action-email" aria-label="Send an email to orbibics@gmail.com">
+                    <span class="contact-action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                            <path d="m3 7 9 6 9-6"></path>
+                        </svg>
+                    </span>
+                    <span class="contact-action-text">
+                        <span class="contact-action-label">Email</span>
+                        <span class="contact-action-value">orbibics@gmail.com</span>
+                    </span>
+                </a>
+                <a href="https://wa.me/972584455881?text=Hi%20Or%2C%20I%20came%20across%20your%20portfolio%20and%20would%20like%20to%20get%20in%20touch." target="_blank" rel="noopener noreferrer" class="contact-action contact-action-whatsapp" aria-label="Send a WhatsApp message">
+                    <span class="contact-action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path>
+                        </svg>
+                    </span>
+                    <span class="contact-action-text">
+                        <span class="contact-action-label">WhatsApp</span>
+                        <span class="contact-action-value">Send a message</span>
+                    </span>
+                </a>
+            </div>
+
             <div class="footer-links">
                 <a href="https://www.linkedin.com/in/orbibi" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://github.com/orbibi" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="mailto:orbibior@gmail.com">Email Me</a>
+                <a href="https://github.com/OrBibi" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
-            <p class="copyright">&copy; 2025 Or Bibi. All rights reserved.</p>
+            <p class="copyright">&copy; 2026 Or Bibi. All rights reserved.</p>
         </div>
     </footer>
 
